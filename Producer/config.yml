@@ -1,0 +1,16 @@
+#Event Params
+Reporter ID Start Index: 1
+Reporter ID Jump Value: 1
+Metric ID Min Value: 1
+Metric ID Max Value: 11
+Metric Value Min Value: 1
+Metric Value Max Value: 101
+Message Interval: 1000
+Message: "Hello world"
+#Kafka Params
+Kafka Server Info: kafka:9092
+Kafka Topic: events
+  
+
+
+

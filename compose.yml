@@ -1,0 +1,71 @@
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+       ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
+      
+  mongodb:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+      
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  producer:
+    image: producer
+    build:
+      context: ./Producer
+      dockerfile: Dockerfile
+    depends_on:
+      - kafka
+    volumes:
+      - ./Producer/config.yml:/config.yml
+    ports:
+      - 3000
+
+  consumer:
+    image: consumer
+    build:
+      context: ./Consumer
+      dockerfile: Dockerfile
+    depends_on:
+      - kafka
+    volumes:
+      - ./Consumer/config.yml:/config.yml
+    ports:
+      - 4000
+
+  etl:
+    image: etl
+    build:
+      context: ./ETL
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./ETL/config.yml:/config.yml
+    ports:
+      - 5000

@@ -1,0 +1,9 @@
+Time Format Data: yyyy-MM-ddTHH:mm:ss.fffZ
+Time Format Key: MM/dd/yyyy:HH:mm:ss
+#Mongo Params
+Mongo Connection String: mongodb://mongo
+Mongo DB Name: eventsDb
+Mongo Collection Name: events
+#REDIS Params
+REDIS Connection String: redis:6379
+ETL Wakeup Timer: 30000

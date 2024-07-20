@@ -1,0 +1,12 @@
+Time Format: yyyy-MM-ddTHH:mm:ss.fffZ
+#Kafka Params
+Kafka Server Info: kafka:9092
+Kafka Topic: events
+Kafka Group Id: EventsGroup
+#Mongo Params
+Mongo Connection String: mongodb://mongo
+Mongo DB Name: eventsDb
+Mongo Collection Name: events
+
+
+
